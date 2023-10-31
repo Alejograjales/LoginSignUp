@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './LoginSignup.css'
 
 import email_icon from '../Assets/email.png'
@@ -73,6 +73,27 @@ const LoginSignup = () => {
         console.error('Error al enviar los datos:', error);
       });
     };
+
+    useEffect(() => {
+      const generateStars = () => {
+        const numStars = 300; // Cantidad de estrellas
+  
+        for (let i = 0; i < numStars; i++) {
+          const star = document.createElement('div');
+          star.classList.add('stars');
+          star.style.top = Math.random() * 100 + 'vh'; // Posición vertical aleatoria
+          star.style.left = Math.random() * 100 + 'vw'; // Posición horizontal aleatoria
+          document.body.appendChild(star);
+        }
+      };
+  
+      generateStars(); // Llamada a la función para generar estrellas
+  
+      return () => {
+        const stars = document.querySelectorAll('.stars');
+        stars.forEach(star => star.remove());
+      };
+    }, []);
 
   return (
 

@@ -18,7 +18,7 @@
 }
 
 .text {
-    color: #3c009d;
+    color: #1B2735;
     font-size: 48px;
     font-weight: 700;
 }
@@ -26,7 +26,7 @@
 .underline {
     width: 61px;
     height: 6px;
-    background: #3c009d;
+    background: #1B2735;
     border-radius: 9px;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .forgot-password span {
-    color: #4c00b4;
+    color: #12141d;
     text-decoration: underline;
     cursor: pointer;
 }
@@ -87,7 +87,7 @@
     width: 220px;
     height: 59px;
     color: #fff;
-    background: #4c00b4;
+    background: #1B2735;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
@@ -101,7 +101,7 @@
     border-radius: 1rem;
     border: none;
     position: relative;
-    background: #4c00b4;
+    background: #1B2735;
     transition: 0.1s;
 }
 
@@ -109,7 +109,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(76, 0, 180, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(0, 25, 81, 1) 17.8%, rgba(12, 33, 101, 1) 100.2%);
     filter: blur(15px);
     z-index: -1;
     position: absolute;
@@ -119,7 +119,7 @@
 
 .submit:active {
     transform: scale(0.9) rotate(3deg);
-    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(76, 0, 180, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(0, 25, 81, 1) 17.8%, rgba(12, 33, 101, 1) 100.2%);
     transition: 0.5s;
 }
 
@@ -149,10 +149,10 @@
 
 .input select:focus,
 .input select:active {
-    background: #4c00b4; 
+    background: #1B2735; 
     color: #fff; 
-    border: 2px solid #3c009d;
-    box-shadow: 0 0 5px rgba(60, 0, 157, 0.7);
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 .error-message {
@@ -174,7 +174,7 @@
     width: 220px;
     height: 59px;
     color: #fff;
-    background: #4c00b4;
+    background: #1B2735;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
@@ -188,7 +188,7 @@
     border-radius: 1rem;
     border: none;
     position: relative;
-    background: #4c00b4;
+    background: #1B2735;
     transition: 0.1s;
 }
 
@@ -196,7 +196,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(76, 0, 180, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(0, 25, 81, 1) 17.8%, rgba(12, 33, 101, 1) 100.2%);
     filter: blur(15px);
     z-index: -1;
     position: absolute;
@@ -206,8 +206,37 @@
 
 .button-container .submit:active {
     transform: scale(0.9) rotate(3deg);
-    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(76, 0, 180, 1) 17.8%, rgba(2, 245, 255, 1) 100.2%);
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(0, 25, 81, 1) 17.8%, rgba(12, 33, 101, 1) 100.2%);
     transition: 0.5s;
 }
+
+body {
+    margin: 0;
+    overflow: auto; /*Scroll por la pagina*/
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #12141d 100%);
+  }
+  
+  .stars {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: #fff;
+    box-shadow: 100px 200px 10px #fff; /* Estilo de la estrella */
+    animation: twinkle 3s infinite;
+  }
+  
+  @keyframes twinkle {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  
 
 
