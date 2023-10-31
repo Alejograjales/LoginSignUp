@@ -52,12 +52,38 @@ const LoginSignup = () => {
      }
     };
 
+    const submitForm = () => {
+      // Lógica para enviar los datos al localhost:8000
+      fetch('http://localhost:8000/tu-ruta', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, confirmPassword }),
+      })
+      .then(response => {
+        if (response.ok) {
+          // Realizar acciones con la respuesta si es necesaria
+          console.log('Datos enviados correctamente.');
+        } else {
+          throw new Error('Error al enviar los datos.');
+        }
+      })
+      .catch(error => {
+        console.error('Error al enviar los datos:', error);
+      });
+    };
+
   return (
 
     <div className='container'>
         <div className="header">
             <div className="text">{action}</div>
             <div className="underline"></div>
+        </div>
+        <div className="submit-container">
+            <div className={action==="Iniciar Sesion"?"submit gray":"submit"} onClick={()=>{setAction("Registrarse")}}>Registrarse</div>
+            <div className={action==="Registrarse"?"submit gray":"submit"} onClick={()=>{setAction("Iniciar Sesion")}}>Iniciar Sesion</div>
         </div>
         <div className="inputs">
         {action === "Registrarse" ? (
@@ -115,9 +141,8 @@ const LoginSignup = () => {
           {emailError && email.length > 0 && (<div className="error-message">{emailError}</div>)}
         </div>
         {action==="Registrarse"?<div></div>: <div className="forgot-password">¿Olvidaste tu contraseña? <span>Haz click aqui</span></div>}
-        <div className="submit-container">
-            <div className={action==="Iniciar Sesion"?"submit gray":"submit"} onClick={()=>{setAction("Registrarse")}}>Registrarse</div>
-            <div className={action==="Registrarse"?"submit gray":"submit"} onClick={()=>{setAction("Iniciar Sesion")}}>Iniciar Sesion</div>
+        <div className="button-container">
+        <div className="submit" onClick={submitForm}>Enviar formulario</div>
         </div>
     </div>
   )
