@@ -15,9 +15,9 @@ const LoginSignup = () => {
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [typecard] = useState ('');
-    const [idcard] = useState ('');
-    const [name] = useState ('');
-    const [surname] = useState ('');
+    const [idcard, setIdCard] = useState ('');
+    const [name, setName] = useState ('');
+    const [surname, setSurname] = useState ('');
 
     const handlePasswordChange = (e) => {
       const newPassword = e.target.value;
@@ -148,7 +148,7 @@ const LoginSignup = () => {
           <div className="input">
             <img src={id_icon} alt='' />
             <input type="text" value={typecard} placeholder="Tipo de documento:" readOnly name='typecard'/>
-            <select>
+            <select value={idcard} onChange={(e) => setIdCard(e.target.value)}>
               <option value="cedula">CC</option>
               <option value="extranjero">CE</option>
               <option value="nit">NIT</option>
@@ -157,20 +157,23 @@ const LoginSignup = () => {
           </div>
         ) : null}
 
-           {action==="Iniciar Sesion"?<div></div>:<div className="input">
+           {action==="Iniciar Sesion" ? null : (
+           <div className="input">
             <img src={id_icon} alt='' />
-            <input type='text' value={idcard} placeholder='Numero de documento' name='idcard' />
-           </div>}
+            <input type='text' value={idcard} onChange={(e) => setIdCard(e.target.value)} placeholder='Numero de documento' name='idcard' />
+           </div>)}
            
-           {action==="Iniciar Sesion"?<div></div>:<div className="input">
+           {action==="Iniciar Sesion" ? null : (
+           <div className="input">
             <img src={user_icon} alt='' />
-            <input type='text' value={name} placeholder='Nombre' name='name' />
-           </div>}
+            <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Nombre' name='name' />
+           </div>)}
 
-           {action==="Iniciar Sesion"?<div></div>:<div className="input">
+           {action==="Iniciar Sesion" ? null : (
+           <div className="input">
             <img src={user_icon} alt='' />
-            <input type='text' value={surname} placeholder='Apellidos' name='surname' />
-           </div>}
+            <input type='text' value={surname} onChange={(e) => setSurname(e.target.value)} placeholder='Apellidos' name='surname' />
+           </div>)}
 
            <div className="input">
             <img src={email_icon} alt='' />
