@@ -14,6 +14,10 @@ const LoginSignup = () => {
     const [passwordError, setPasswordError] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [typecard] = useState ('');
+    const [idcard] = useState ('');
+    const [name] = useState ('');
+    const [surname] = useState ('');
 
     const handlePasswordChange = (e) => {
       const newPassword = e.target.value;
@@ -22,9 +26,9 @@ const LoginSignup = () => {
 
      if (action==='Registrarse') {
     // Validación de contraseña
-      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{5,}$/;
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
       if (!passwordPattern.test(newPassword)) {
-      setPasswordError('La contraseña debe contener minimo 5 caracteres alfanumericos incluido mayuscula.');
+      setPasswordError('La contraseña debe contener mínimo 8 caracteres alfanuméricos incluyendo mayúsculas.');
       }
      }
     };
@@ -53,25 +57,58 @@ const LoginSignup = () => {
     };
 
     const submitForm = () => {
-      // Lógica para enviar los datos al localhost:8000
-      fetch('http://localhost:8000/tu-ruta', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password, confirmPassword }),
-      })
-      .then(response => {
-        if (response.ok) {
-          // Realizar acciones con la respuesta si es necesaria
-          console.log('Datos enviados correctamente.');
-        } else {
-          throw new Error('Error al enviar los datos.');
-        }
-      })
-      .catch(error => {
-        console.error('Error al enviar los datos:', error);
-      });
+      // Lógica para enviar los datos al localhost:8000 para el inicio de sesión
+      if (action === 'Iniciar Sesion') {
+        fetch('http://localhost:8000/login', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              // Realizar acciones con la respuesta si es necesaria
+              console.log(response);
+            } else {
+              throw new Error('Error al enviar los datos.');
+            }
+          })
+          .catch((error) => {
+            console.error('Error al enviar los datos:', error);
+          });
+      } else {
+        // Lógica para enviar los datos al localhost:8000 para el registro
+        fetch('http://localhost:8000/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            typecard: typecard,
+            idcard: idcard,
+            name: name,
+            surname: surname,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              // Realizar acciones con la respuesta si es necesaria
+              console.log(response);
+            } else {
+              throw new Error('Error al enviar los datos.');
+            }
+          })
+          .catch((error) => {
+            console.error('Error al enviar los datos:', error);
+          });
+      }
     };
 
     useEffect(() => {
@@ -110,7 +147,7 @@ const LoginSignup = () => {
         {action === "Registrarse" ? (
           <div className="input">
             <img src={id_icon} alt='' />
-            <input type="text" placeholder="Tipo de documento:" readOnly/>
+            <input type="text" value={typecard} placeholder="Tipo de documento:" readOnly name='typecard'/>
             <select>
               <option value="cedula">CC</option>
               <option value="extranjero">CE</option>
@@ -122,12 +159,17 @@ const LoginSignup = () => {
 
            {action==="Iniciar Sesion"?<div></div>:<div className="input">
             <img src={id_icon} alt='' />
-            <input type='text' placeholder='Numero de documento' />
+            <input type='text' value={idcard} placeholder='Numero de documento' name='idcard' />
            </div>}
            
            {action==="Iniciar Sesion"?<div></div>:<div className="input">
             <img src={user_icon} alt='' />
-            <input type='text' placeholder='Nombre completo' />
+            <input type='text' value={name} placeholder='Nombre' name='name' />
+           </div>}
+
+           {action==="Iniciar Sesion"?<div></div>:<div className="input">
+            <img src={user_icon} alt='' />
+            <input type='text' value={surname} placeholder='Apellidos' name='surname' />
            </div>}
 
            <div className="input">
@@ -136,7 +178,8 @@ const LoginSignup = () => {
              type='email' 
              placeholder='Correo electronico'
              value={email}
-             onChange={handleEmailChange}  />
+             onChange={handleEmailChange}
+             name='email'  />
            </div>
            <div className="input">
           <img src={password_icon} alt="" />
@@ -145,6 +188,7 @@ const LoginSignup = () => {
             placeholder="Contraseña"
             value={password}
             onChange={handlePasswordChange}
+            name='password'
           />
         </div>
         {action === "Registrarse" ? (
@@ -155,6 +199,7 @@ const LoginSignup = () => {
               placeholder="Confirmar contraseña"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
+              name='password_confirmation'
             />
           </div>
         ) : null}
