@@ -26,9 +26,9 @@ const LoginSignup = () => {
 
      if (action==='Registrarse') {
     // Validación de contraseña
-      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?[\];',.]).{8,}$/;
       if (!passwordPattern.test(newPassword)) {
-      setPasswordError('La contraseña debe contener mínimo 8 caracteres alfanuméricos incluyendo mayúsculas.');
+      setPasswordError('La contraseña debe contener mínimo 8 caracteres alfanuméricos incluyendo mayúsculas y un caracter especial.');
       }
      }
     };
@@ -60,13 +60,13 @@ const LoginSignup = () => {
       // Lógica para enviar los datos al localhost:8000 para el inicio de sesión
       if (action === 'Iniciar Sesion') {
         fetch('http://localhost:8000/login', {
-          method: 'GET',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: email,
-            password: password,
+            'email': email,
+            'password': password,
           }),
         })
           .then((response) => {
@@ -88,13 +88,13 @@ const LoginSignup = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            typecard: typecard,
-            idcard: idcard,
-            name: name,
-            surname: surname,
+            'email': email,
+            'password': password,
+            'confirmPassword': confirmPassword,
+            'typecard': typecard,
+            'idcard': idcard,
+            'name': name,
+            'surname': surname,
           }),
         })
           .then((response) => {
